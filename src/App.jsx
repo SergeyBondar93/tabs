@@ -68,6 +68,106 @@ const items = [
   {
     label: TabThreeTitle,
     component: TabThree
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo,
+    disabled: true
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree,
+    disabled: true
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo,
+    disabled: true
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree,
+    disabled: true
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
+  },
+  {
+    label: () => <div style={{ color: "red" }}>Tab two</div>,
+    component: TabTwo
+  },
+  {
+    label: TabThreeTitle,
+    component: TabThree
   }
 ];
 

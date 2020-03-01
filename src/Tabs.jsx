@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useLayoutEffect } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { LabelTab } from "./LabelTab";
@@ -14,7 +14,7 @@ export const Tabs = ({
 }) => {
   const [tabsLabels, setTabsLabels] = useState([]);
   const [current, setCurrent] = useState(currentProps);
-  const tabLabelWrapperRef = useRef(null);
+  const tabLabelWrapperRef = useRef({ scrollWidth: 0 });
   const scrollRef = useRef(null);
   const [needNavButtons, setNeedNavButtons] = useState(false);
   const [opacity, setOpacity] = useState(1);
@@ -29,13 +29,13 @@ export const Tabs = ({
 
   useEffect(() => {
     if (!tabLabelWrapperRef.current) return;
-    Promise.resolve().then(() => {
-      setNeedNavButtons(
-        tabLabelWrapperRef.current.scrollWidth >
-          tabLabelWrapperRef.current.offsetWidth
-      );
-    });
-  }, [tabLabelWrapperRef.current]);
+    // Promise.resolve().then(() => {
+    setNeedNavButtons(
+      tabLabelWrapperRef.current.scrollWidth >
+        tabLabelWrapperRef.current.offsetWidth
+    );
+    // });
+  }, [tabLabelWrapperRef.current.scrollWidth]);
 
   useEffect(() => {
     setTabsLabels((items || []).map(({ label }) => label));
