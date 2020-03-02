@@ -18,7 +18,7 @@ export const TabOne = () => {
   return (
     <div>
       {images.map(url => (
-        <Img url={url} />
+        <Img url={url} key={url} />
       ))}
     </div>
   );

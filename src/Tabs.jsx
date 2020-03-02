@@ -29,17 +29,15 @@ export const Tabs = ({
 
   useEffect(() => {
     if (!tabLabelWrapperRef.current) return;
-    // Promise.resolve().then(() => {
     setNeedNavButtons(
       tabLabelWrapperRef.current.scrollWidth >
         tabLabelWrapperRef.current.offsetWidth
     );
-    // });
   }, [tabLabelWrapperRef.current.scrollWidth]);
 
   useEffect(() => {
     setTabsLabels((items || []).map(({ label }) => label));
-  }, [items]);
+  }, [items]);  
 
   const handleChange = useCallback(
     (newIndex, { width, left }, changeOpacity = true) => {
@@ -76,8 +74,50 @@ export const Tabs = ({
     [tabLabelWrapperRef.current, scrollRef.current]
   );
 
+  const getNeedScrollForVisible = (left, width, scrolled, fullWidth) => {
+    if (left > scrolled && left + width < scrolled + fullWidth) {
+      
+      // 'на экране';
+      return width 
+    }
+    if (left > scrolled && left < scrolled + fullWidth) {
+      
+      // 'правая крайняя видимая'; !!!!!!!!!!!!!!
+    return {right: width - (scrolled + fullWidth - left)}  
+    }
+    if (left + width > scrolled + fullWidth) {
+
+      // 'правые невидимые';
+      return width
+    }
+    if (left < scrolled && left + width > scrolled) {
+
+      // 'левая крайняя видимая' !!!!!!!
+      return {left: scrolled - left } 
+    }
+    // 'левая не видимая'
+    return width
+
+
+  }
+
   const handleChangeScroll = useCallback(
-    (direction, scroll = 200) => {
+    (direction, scroll) => {
+      if (!scroll) {
+        const { offsetLeft, offsetWidth, scrollLeft } = scrollRef.current
+        const { children } = tabLabelWrapperRef.current;
+        const mappedChildren = [...children]
+          .map(({ offsetLeft: left, offsetWidth: width }) =>
+             ({ 
+               left: left - offsetLeft, 
+               width, 
+               needScrollForVisible: getNeedScrollForVisible(left - offsetLeft, width,  scrollLeft, offsetWidth ) })) 
+
+        const elem = mappedChildren.find(({ needScrollForVisible }) => needScrollForVisible[direction]) || {};
+        scroll = ((elem.needScrollForVisible || {})[direction] || 0) + 20
+      }
+
+
       const time = 200;
       const stepTime = 1000 / 60;
       const steps = time / stepTime;
@@ -96,7 +136,7 @@ export const Tabs = ({
     },
     [scrollRef.current]
   );
-
+  
   return (
     <>
       <div className="tabs-header">
@@ -105,6 +145,7 @@ export const Tabs = ({
           <div ref={tabLabelWrapperRef} className="tab-label-wrapper">
             {tabsLabels.map((label, index) => (
               <LabelTab
+                key={index}
                 disabled={items[index].disabled}
                 current={current === index}
                 index={index}
