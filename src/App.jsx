@@ -6,16 +6,7 @@ const TabThreeTitle = () => <h1>Tab three title</h1>;
 
 const TabOneLabel = () => (
   <>
-    {new Array(Math.floor(Math.random() * 5) + 1).fill(0).map((_el, i) => (
-      <img
-        key={i}
-        height="30px"
-        style={{
-          margin: "3px"
-        }}
-        src="https://mixnews.lv/wp-content/uploads/2019/11/22/1574367889_0042-e1574430618761.jpg"
-      />
-    ))}
+    First TAB
   </>
 );
 
