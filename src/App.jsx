@@ -12,13 +12,13 @@ const TabOneLabel = () => (
 
 const items = [
   {
-    label: TabOneLabel,
-    component: TabOne
-  },
-  {
     label: () => <div style={{ color: "red" }}>Tab two</div>,
     component: TabTwo,
     disabled: true
+  },
+  {
+    label: TabOneLabel,
+    component: TabOne
   },
   {
     label: TabThreeTitle,
